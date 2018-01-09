@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class EventInfo extends Component {
     render() {
+        axios.defaults.headers.common['Authorization'] = 'Token 007832c70cd9594351f6895ee1ddaad9de4a19a9';
+        axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/').then(function(resp) {
+            console.log(resp);
+        });
         return(
             <div className="EventInfoPanelView LinearLocationInfoWindowContainer">
                 <table>
