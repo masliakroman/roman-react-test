@@ -12,11 +12,9 @@ class EventInfo extends Component {
     }
 
     componentDidMount() {
-        let that = this;
-        axios.defaults.headers.common['Authorization'] = 'Token 007832c70cd9594351f6895ee1ddaad9de4a19a9';
-        axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/').then(function(resp) {
+        axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/').then((resp) => {
             console.log(resp);
-            that.setState({'data': resp.data});
+            this.setState({'data': resp.data});
         });
     }
 

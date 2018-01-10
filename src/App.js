@@ -3,10 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import EventInfo from './eventInfo';
 import Login from './login'
+import axios from 'axios';
 import { Switch, Route } from 'react-router-dom'
 
 class App extends Component {
   render() {
+    axios.defaults.headers.common['Authorization'] = 'Token 007832c70cd9594351f6895ee1ddaad9de4a19a9';
     return (
       <div className="App">
         <header className="App-header">
