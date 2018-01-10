@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Loader from './loader';
+import { Link } from 'react-router-dom';
 
 class EventInfo extends Component {
     constructor(props) {
@@ -69,6 +70,15 @@ class EventInfo extends Component {
                                     </div>
                                     <div className="AH_attached-img-container attached-img-container col-sm-12"></div>
                                 </div>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td>
+                            <div className="col-sm-12 col-xs-12">
+                                <button className="btn btn-default>">
+                                    <Link to='/login'>Login</Link>
+                                </button>
+                            </div>
                             </td>
                         </tr>
                         </tbody>
