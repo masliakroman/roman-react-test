@@ -11,8 +11,21 @@ class EventInfo extends Component {
         };
     }
 
+    getUserAccount() {
+        return axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/');
+    }
+
+    getUserPermissions() {
+        return axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/color/');
+    }
+
     componentDidMount() {
         axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/').then((resp) => {
+            console.log(resp);
+            this.setState({'data': resp.data});
+        });
+
+        axios.all([this.getUserAccount(), this.getUserPermissions()]).then((resp) => {
             console.log(resp);
             this.setState({'data': resp.data});
         });
