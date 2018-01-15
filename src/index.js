@@ -8,9 +8,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import RootStore from './store';
 
+const store = new RootStore();
+
 ReactDOM.render((
   <BrowserRouter>
-    <Provider rootStore={new RootStore()}><App /></Provider>
+    <Provider {...store}>
+        <App />
+    </Provider>
   </BrowserRouter>
 ), document.getElementById('root'));
 registerServiceWorker();
