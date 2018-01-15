@@ -33,7 +33,7 @@ class RegisterStore {
 
 
     @action.bound
-    saveValue = (e) => {
+    saveValue (e) {
         const { name, value } = e.target;
         const validate = e.target.getAttribute('validate');
         console.log(validate);
@@ -43,14 +43,14 @@ class RegisterStore {
     }
 
     @action.bound
-    saveInputValue = (e) => {
+    saveInputValue (e) {
         const { name, checked } = e.target;
 
         this.data.formData[name] = checked;
     }
 
     @action.bound
-    onBtnClickHandler = (e) => {
+    onBtnClickHandler (e) { 
         e.preventDefault();
 
         this.data.states.saving = true;
