@@ -2,38 +2,41 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Loader from './loader';
 import { Link } from 'react-router-dom';
+import { observer, inject } from 'mobx-react';
+
+@inject('event')
+@observer
 
 class EventInfo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: null
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     const register = this.props.register;
+    // }
 
-    getUserAccount() {
-        return axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/');
-    }
+    // getUserAccount() {
+    //     return axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/');
+    // }
 
-    getUserPermissions() {
-        return axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/color/');
-    }
+    // getUserPermissions() {
+    //     return axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/color/');
+    // }
 
-    componentDidMount() {
-        axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/').then((resp) => {
-            console.log(resp);
-            this.setState({'data': resp.data});
-        });
+    componentWillMount() {
+        // axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/event/449/').then((resp) => {
+        //     console.log(resp);
+        //     this.setState({'data': resp.data});
+        // });
 
-        axios.all([this.getUserAccount(), this.getUserPermissions()]).then((resp) => {
-            console.log(resp);
-            this.setState({'data': resp.data});
-        });
+        // axios.all([this.getUserAccount(), this.getUserPermissions()]).then((resp) => {
+        //     console.log(resp);
+        //     this.setState({'data': resp.data});
+        // });
+        const {fetchData} = this.props.event;
+        fetchData();
     }
 
     render() {
-        let data = this.state.data;
-
+        const data = this.props.event.data;
         if (data) {
             return(
                 <div className="EventInfoPanelView LinearLocationInfoWindowContainer">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Loader from './loader';
 import axios from 'axios';
 import update from 'react-addons-update'; // https://reactjs.org/docs/update.html
-import { observer, inject } from 'mobx-react'
+import { observer, inject } from 'mobx-react';
 
 // const validation = {
 //     email: (value) => {return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)},

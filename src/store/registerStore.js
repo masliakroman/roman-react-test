@@ -49,22 +49,40 @@ class RegisterStore {
         this.data.formData[name] = checked;
     }
 
+    // @action.bound
+    // onBtnClickHandler (e) { 
+    //     e.preventDefault();
+
+    //     this.data.states.saving = true;
+
+    //     axios({
+    //       method: 'post',
+    //       url: 'http://webapp.test.smartcity.ibigroup.in/api/1/color/',
+    //       data: {
+    //         name: this.data.formData.color,
+    //         hex_code: this.data.formData.colorName
+    //     }
+    //     }).then(() => {
+    //         this.data.states.saving = false;
+    //     });
+    // }
+
     @action.bound
-    onBtnClickHandler (e) { 
+    async onBtnClickHandler (e) {
         e.preventDefault();
-
         this.data.states.saving = true;
-
-        axios({
-          method: 'post',
-          url: 'http://webapp.test.smartcity.ibigroup.in/api/1/color/',
-          data: {
-            name: this.data.formData.color,
-            hex_code: this.data.formData.colorName
-        }
-        }).then(() => {
-            this.data.states.saving = false;
+        const response = await axios({
+            method: 'post',
+            url: 'http://webapp.test.smartcity.ibigroup.in/api/1/color/',
+              data: {
+                name: this.data.formData.color,
+                hex_code: this.data.formData.colorName
+            }
         });
+        runInAction(() => {
+            this.data.states.saving = false;
+            this.loading = false;
+        })
     }
 
 
