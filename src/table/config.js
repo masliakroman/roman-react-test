@@ -5,6 +5,7 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 import Pagination from './pagination';
 import BodyComponent from './bodyComponent';
+import './styles.css';
 
 const pageData = {
     permissions: {
@@ -42,11 +43,11 @@ const pageData = {
 }
 
 const thTable = pageData.fields.map((item) => 
-    <Th key={item.id}>{item.displayName}</Th>
+    <Th className="align-center" key={item.id}>{item.displayName}</Th>
 );
 
 const actionButtonsTitle = pageData.actionButtons.map((item) => 
-    <Th key={item}>{item}</Th>
+    <Th className="align-center" key={item}>{item}</Th>
 );
 
 @inject('tableData')
@@ -61,7 +62,7 @@ class Config extends Component {
 
         return (
             <div>
-                <Table>
+                <Table className="table table-striped">
                     <Thead> 
                         <Tr>
                             {actionButtonsTitle.concat(thTable)}

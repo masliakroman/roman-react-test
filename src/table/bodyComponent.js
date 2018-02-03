@@ -12,7 +12,7 @@ class BodyComponent extends Component {
     render() {
         const {dataForTable, loading} = this.props.tableData.data;
         if (loading) {
-            return(<div>Loading...</div>);
+            return(<div className="loading">Loading...</div>);
         } else {
             return(
             <Tbody>

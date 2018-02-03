@@ -9,7 +9,7 @@ class TrTable extends Component {
         );
 
         const actionButtons = this.props.actionButtons.map((item) => 
-            <Th className="action-buttons" key={item}><button className="btn btn-default">{item}</button></Th>
+            <Th className="action-buttons width-100" key={item}><button className="btn btn-default width-70">{item}</button></Th>
         );
         return(
             <Tr>

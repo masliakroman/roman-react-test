@@ -1,0 +1,45 @@
+.input-50 {
+    width: 60px !important;
+}
+
+.float-left {
+    float: left;
+}
+
+.text {
+    padding: 7px 10px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.m-0-20 {
+    margin: 0 20px;
+}
+
+.width-100 {
+    width: 100px;
+}
+
+.width-70 {
+    width: 70px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.loading {
+    font-size: 50px;
+    margin: 0;
+    width: ;
+    height: 200px;
+    text-align: center;
+    background-color: white;
+    padding: 60px 0;
+}
