@@ -11,7 +11,7 @@ class TrSearch extends Component {
         console.log(this.props.tableData.data.searchingValue);
         const MyComponent = (value) => {
             if (value) {
-                return <input type="text" placeholder="search" onKeyDown={this.props.tableData.setFiltering} />;
+                return <input value={this.props.tableData.data.searchingValue} type="text" placeholder="search" onKeyDown={this.props.tableData.setFiltering} onChange={this.props.tableData.setFilteringData} />;
             } else {
                 return <div></div>;
             }

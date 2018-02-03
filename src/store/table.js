@@ -17,17 +17,26 @@ class TableDataStore {
     }
 
     @action.bound
+    setFilteringData(e) {
+        this.data.searchingValue = e.target.value;
+    }
+
+    @action.bound
     prevPage () {
         let newPage = this.data.activePage;
 
-        this.setNewPage(newPage-1 > 0 ? newPage-1 : 1);
+        if (newPage-1 > 0) {
+            this.setNewPage(newPage-1);
+        }
     }
 
     @action.bound
     nextPage () {
         let newPage = this.data.activePage;
 
-        this.setNewPage(newPage+1 < this.maxPageCount ? newPage+1 : 1);
+        if (newPage+1 <= this.maxPageCount) {
+            this.setNewPage(newPage+1);
+        }
     }
 
     @action.bound
@@ -50,7 +59,6 @@ class TableDataStore {
     @action.bound
     setFiltering(e) {
         if (e.keyCode === 13) {
-            this.data.searchingValue = e.target.value;
             this.fetchData();
         }
     }

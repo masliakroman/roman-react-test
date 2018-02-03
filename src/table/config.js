@@ -3,9 +3,8 @@ import { observer, inject } from 'mobx-react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
-import TrTable from './trTable';
-import TrSearch from './trSearch';
 import Pagination from './pagination';
+import BodyComponent from './bodyComponent';
 
 const pageData = {
     permissions: {
@@ -60,30 +59,19 @@ class Config extends Component {
     render() {
         const {dataForTable, loading} = this.props.tableData.data;
 
-        if (loading) {
-            return(<div>Loading...</div>);
-        } else {
-            return (
-                <div>
-                    <Table>
-                        <Thead> 
-                            <Tr>
-                                {actionButtonsTitle.concat(thTable)}
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            <TrSearch actionButtons={pageData.actionButtons} fields={pageData.fields} />
-                            {
-                                dataForTable.results.map((value) => 
-                                    <TrTable key={value.id} actionButtons={pageData.actionButtons} fields={pageData.fields} data={value} />
-                                )
-                            }
-                        </Tbody>
-                    </Table>
-                    <Pagination />
-                </div>
-            );
-        }
+        return (
+            <div>
+                <Table>
+                    <Thead> 
+                        <Tr>
+                            {actionButtonsTitle.concat(thTable)}
+                        </Tr>
+                    </Thead>
+                    <BodyComponent pageData={pageData} />
+                </Table>
+                <Pagination />
+            </div>
+        );
     }
 }   
 
