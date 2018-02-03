@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import EventInfo from './eventInfo';
 import Login from './login';
-import Config from './config';
+import Config from './table/config';
 import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
 

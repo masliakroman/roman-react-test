@@ -1,60 +1,72 @@
-import { action, observable, toJS, runInAction } from 'mobx';
+import { action, autorun, computed, observable, toJS, runInAction } from 'mobx';
 import axios from 'axios';
-
-
-const datat = [{
-    name: 'Tanner Linsley',
-    age: 26,
-    friend: {
-      name: 'Jason Maurer',
-      age: 23,
-    }
-  },{
-    name: 'Tanner Linsley1',
-    age: 25,
-    friend: {
-      name: 'Jason Maurer1',
-      age: 25,
-    }
-  },{
-    name: 'Tanner Linsley2',
-    age: 28,
-    friend: {
-      name: 'Jason Maurer2',
-      age: 28,
-    }
-  }];
-
-const columns = [{
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
-  }, {
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
-  }, {
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
-  }, {
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
-  }];
-
 
 class TableDataStore {
     @observable
-    dataForTable = null;
+    data = {
+        loading: true,
+        dataForTable: null,
+        activePage: 1,
+        pageCount: 0,
+        itemPerPage: 5,
+        searchingValue: ''
+    };
+
+    @computed get maxPageCount() {
+        return Math.ceil(this.data.pageCount/this.data.itemPerPage);
+    }
+
+    @action.bound
+    prevPage () {
+        let newPage = this.data.activePage;
+
+        this.setNewPage(newPage-1 > 0 ? newPage-1 : 1);
+    }
+
+    @action.bound
+    nextPage () {
+        let newPage = this.data.activePage;
+
+        this.setNewPage(newPage+1 < this.maxPageCount ? newPage+1 : 1);
+    }
+
+    @action.bound
+    changeItemPerPage (e) {
+        this.data.activePage = 1;
+        this.data.itemPerPage = +e.target.value;
+        this.fetchData();
+    }
+
+    @action.bound
+    setNewPage (val) {
+        if (val.target && val.target.value) {
+            this.data.activePage = +val.target.value;
+        } else {
+            this.data.activePage = val;
+        }
+        this.fetchData();
+    }
+
+    @action.bound
+    setFiltering(e) {
+        this.data.searchingValue = 'text__icontains=' + e.target.value;
+        this.fetchData();
+    }
 
     @action.bound
     async fetchData() {
-        const response = await axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/approvedword/?limit=20&offset=0&ordering=text');
+        this.data.loading = true;
+        const {data, status} = await axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/approvedword/?limit=' + 
+            this.data.itemPerPage + '&offset=' + ((this.data.activePage - 1)*this.data.itemPerPage) + '&ordering=text' +
+            (this.data.searchingValue ? '&' + this.data.searchingValue : ''));
         
         runInAction(() => {
-//             console.log(response);
-            this.dataForTable = {
-                data: datat,
-                columns: columns
-            };
-        })
+            if (status === 200) {
+                this.data.dataForTable = data;
+                this.data.loading = false;
+                this.data.pageCount = data.meta.count;
+            }
+        });
     }
 }
 export default TableDataStore;
