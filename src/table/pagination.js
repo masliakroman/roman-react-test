@@ -6,14 +6,15 @@ import { observer, inject } from 'mobx-react';
 class Pagination extends Component {
 
     render() {
-        const {prevPage, nextPage, data, setNewPage, maxPageCount, changeItemPerPage, itemPerPage} = this.props.tableData;
+        const {prevPage, nextPage, data, setNewPage, maxPageCount, changeItemPerPage} = this.props.tableData;
+        console.log();
         return(
             <div>
                 <button onClick={prevPage}>Prev</button>
                 <div>
                     <div>Page <input type="number" value={data.activePage} onChange={setNewPage} /> of {maxPageCount}</div>
                     <div>
-                        <select onChange={changeItemPerPage} value="itemPerPage">
+                        <select onChange={changeItemPerPage} value={data.itemPerPage}>
                           <option value="5" >5 rows</option>
                           <option value="10" >10 rows</option>
                           <option value="15" >15 rows</option>

@@ -49,16 +49,20 @@ class TableDataStore {
 
     @action.bound
     setFiltering(e) {
-        this.data.searchingValue = 'text__icontains=' + e.target.value;
-        this.fetchData();
+        if (e.keyCode === 13) {
+            this.data.searchingValue = e.target.value;
+            this.fetchData();
+        }
     }
 
     @action.bound
-    async fetchData() {
-        this.data.loading = true;
+    async fetchData(param) {
+        // if (!param) {
+            this.data.loading = true;
+        // }
         const {data, status} = await axios.get('http://webapp.test.smartcity.ibigroup.in/api/1/approvedword/?limit=' + 
             this.data.itemPerPage + '&offset=' + ((this.data.activePage - 1)*this.data.itemPerPage) + '&ordering=text' +
-            (this.data.searchingValue ? '&' + this.data.searchingValue : ''));
+            (this.data.searchingValue ? '&text__icontains=' + this.data.searchingValue : ''));
         
         runInAction(() => {
             if (status === 200) {

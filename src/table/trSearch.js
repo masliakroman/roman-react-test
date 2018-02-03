@@ -8,9 +8,10 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 class TrSearch extends Component {
 
     render() {
+        console.log(this.props.tableData.data.searchingValue);
         const MyComponent = (value) => {
             if (value) {
-                return <input type="text" placeholder="search" value={this.props.tableData.searchingValue} onChange={this.props.tableData.setFiltering} />;
+                return <input type="text" placeholder="search" onKeyDown={this.props.tableData.setFiltering} />;
             } else {
                 return <div></div>;
             }
