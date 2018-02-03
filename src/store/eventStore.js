@@ -24,6 +24,7 @@ class EventStore {
         for(let i = 1; i<1000; i++) {
             console.log(123);
         }
+        // this.data = response[0].data;
         runInAction(() => {
             this.data = response[0].data;
         })
