@@ -9,7 +9,7 @@ import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
-    axios.defaults.headers.common.Authorization = 'Token 007832c70cd9594351f6895ee1ddaad9de4a19a9';
+    axios.defaults.headers.common.Authorization = 'Token';
     return (
       <div className="App">
         <header className="App-header">
